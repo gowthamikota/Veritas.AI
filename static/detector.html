@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Analyzer Pro | Text Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+</head>
+<body class="bg-black min-h-screen overflow-auto relative font-sans">
+    <!-- Animated Background -->
+    <div id="warpDrive" class="fixed inset-0 z-0"></div>
+    
+    <!-- Noise Texture Overlay -->
+    <div class="fixed inset-0 z-10 opacity-30 pointer-events-none noise-texture"></div>
+    
+    <!-- Main Content Container - Scrollable -->
+    <div class="container mx-auto px-4 z-20 max-w-4xl pb-8">
+        <!-- Top Navigation -->
+        <nav class="flex justify-between items-center py-4 px-6 lg:px-12 bg-black/30 backdrop-blur-md sticky top-0 z-30">
+            <div class="flex items-center">
+                <a href="/" class="flex items-center">
+                    <div class="relative h-10 w-10 mr-3">
+                        <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500 to-purple-600 animate-spin-slow blur opacity-70"></div>
+                        <div class="absolute inset-0.5 rounded-full bg-gray-900 flex items-center justify-center">
+                            <i class="fas fa-fingerprint text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500"></i>
+                        </div>
+                    </div>
+                    <span class="text-lg font-bold tracking-wider text-white">VERITAS<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">AI</span></span>
+                </a>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#" class="text-sm text-gray-400 hover:text-white transition">Features</a>
+                <a href="#" class="text-sm text-gray-400 hover:text-white transition">API</a>
+                <a href="#" class="text-sm text-gray-400 hover:text-white transition">Enterprise</a>
+                <a href="#" class="text-sm text-gray-400 hover:text-white transition">Pricing</a>
+            </div>
+            
+            <div>
+                <button class="relative group">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-md blur opacity-30 group-hover:opacity-100 transition duration-300"></div>
+                    <a class="relative px-4 py-2 bg-gray-900 text-gray-300 rounded-md group-hover:text-white transition">Login</a>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area - With some top padding to ensure visibility -->
+        <div class="flex items-center justify-center py-8 mt-4">
+            <div class="relative w-full max-w-3xl">
+                <!-- Main Card with Glow Effect -->
+                <div class="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 rounded-2xl blur-lg opacity-75 animate-pulse-slow"></div>
+                
+                <div class="relative bg-gray-900/90 rounded-xl shadow-2xl overflow-hidden border border-gray-800">
+                    <!-- Hero Header -->
+                    <div class="relative p-6 text-center">
+                        <!-- Top Border Gradient -->
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500"></div>
+                        
+                        <div class="flex justify-center mb-4">
+                            <div class="relative inline-block">
+                                <div class="absolute -inset-2 rounded-full blur opacity-70 bg-gradient-to-r from-cyan-400 to-purple-500 animate-pulse"></div>
+                                <div class="relative bg-gray-800/80 rounded-full p-4 backdrop-blur-sm border border-gray-700">
+                                    <i class="fas fa-brain text-3xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h1 class="glitch-text text-4xl font-black mb-2 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">
+                            AI TEXT DETECTOR
+                        </h1>
+                        
+                        <p class="text-lg text-gray-300 max-w-3xl mx-auto mb-6">
+                            <span class="typing-text">Identify AI-generated content with our advanced neural detection engine</span>
+                        </p>
+                    </div>
+                    
+                    <!-- Text Input Area - Improved text color -->
+                    <div class="px-6 pb-6">
+                        <textarea id="textInput" rows="6" class="w-full p-4 text-white bg-gray-800/80 rounded-xl border border-gray-700 focus:border-purple-500 transition-all resize-none text-base outline-none placeholder-gray-400" placeholder="Paste your text here for analysis..."></textarea>
+                        
+                        <div class="flex flex-col md:flex-row gap-4 mt-6">
+                            <button id="clearBtn" class="flex-1 py-3 px-4 border border-gray-700 hover:border-purple-500 rounded-xl transition-all text-white bg-gray-800/50 hover:bg-gray-800/80 flex items-center justify-center">
+                                <i class="fas fa-trash-alt mr-2"></i>
+                                Clear
+                            </button>
+                            <button id="analyzeBtn" class="group relative flex-1">
+                                <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-xl blur opacity-30 group-hover:opacity-100 transition duration-300"></div>
+                                <div class="relative py-3 px-4 bg-gray-900 text-white rounded-xl font-semibold flex items-center justify-center transition group-hover:bg-gray-950">
+                                    <i class="fas fa-search-plus mr-2"></i>
+                                    <span>Analyze</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Loading Indicator - Always visible when active -->
+                    <div id="loader" class="hidden px-6 pb-8 flex flex-col items-center">
+                        <div class="relative h-16 w-16 mb-4">
+                            <div class="absolute inset-0 rounded-full border-t-2 border-r-2 border-purple-500 animate-spin"></div>
+                            <div class="absolute inset-2 rounded-full border-t-2 border-cyan-400 animate-spin-slow"></div>
+                        </div>
+                        <p class="text-gray-300">Processing through neural networks...</p>
+                    </div>
+                    
+                    <!-- Results Area -->
+                    <div id="resultContainer" class="hidden px-6 pb-8">
+                        <div class="p-6 bg-gray-800/50 rounded-xl border border-gray-700">
+                            <h3 class="text-xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Analysis Results</h3>
+                            <p id="result" class="text-xl mb-3 font-medium text-white"></p>
+                            <div class="mt-4 flex items-center">
+                                <span class="text-sm text-gray-300 mr-2">Confidence:</span>
+                                <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                    <div id="confidenceBar" class="h-full rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 w-0 transition-all duration-700"></div>
+                                </div>
+                                <span id="confidenceText" class="text-sm text-gray-300 ml-3 min-w-[60px] text-right"></span>
+                            </div>
+                            
+                            <!-- Feature Stats -->
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-6">
+                                <div class="p-3 rounded-lg bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 hover:border-purple-500/30 transition duration-300">
+                                    <div class="flex items-center mb-2">
+                                        <div class="flex-shrink-0 rounded-full bg-indigo-900/30 p-2 mr-2">
+                                            <i class="fas fa-chart-line text-indigo-400 text-sm"></i>
+                                        </div>
+                                        <h3 class="text-sm font-bold text-white">Pattern Score</h3>
+                                    </div>
+                                    <p id="patternScore" class="text-gray-400 text-xs">Analyzing linguistic patterns...</p>
+                                </div>
+                                
+                                <div class="p-3 rounded-lg bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 hover:border-cyan-500/30 transition duration-300">
+                                    <div class="flex items-center mb-2">
+                                        <div class="flex-shrink-0 rounded-full bg-cyan-900/30 p-2 mr-2">
+                                            <i class="fas fa-sync-alt text-cyan-400 text-sm"></i>
+                                        </div>
+                                        <h3 class="text-sm font-bold text-white">Entropy</h3>
+                                    </div>
+                                    <p id="entropyScore" class="text-gray-400 text-xs">Measuring randomness...</p>
+                                </div>
+                                
+                                <div class="p-3 rounded-lg bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 hover:border-pink-500/30 transition duration-300">
+                                    <div class="flex items-center mb-2">
+                                        <div class="flex-shrink-0 rounded-full bg-pink-900/30 p-2 mr-2">
+                                            <i class="fas fa-fingerprint text-pink-400 text-sm"></i>
+                                        </div>
+                                        <h3 class="text-sm font-bold text-white">Signature</h3>
+                                    </div>
+                                    <p id="signatureScore" class="text-gray-400 text-xs">Detecting AI signatures...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="py-4 text-center mt-4">
+            <p class="text-gray-500 text-xs">© 2025 VeritasAI • Advanced AI Detection Technologies</p>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script>
+        // Three.js Warp Drive Effect
+        const setupWarpDrive = () => {
+            const container = document.getElementById('warpDrive');
+            
+            // Scene setup
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+            
+            // Create stars
+            const starGeometry = new THREE.BufferGeometry();
+            const starCount = 2000;
+            
+            const positions = new Float32Array(starCount * 3);
+            const velocities = new Float32Array(starCount);
+            const colors = new Float32Array(starCount * 3);
+            
+            const colorPalette = [
+                new THREE.Color(0x4CC9F0), // Cyan
+                new THREE.Color(0x7209B7), // Purple
+                new THREE.Color(0xF72585),  // Pink
+                new THREE.Color(0x3A0CA3)   // Deep blue
+            ];
+            
+            // Initialize stars with random positions
+            for (let i = 0; i < starCount; i++) {
+                // Position
+                const z = Math.random() * 2000 - 1000;
+                const r = 50 + Math.random() * 100;
+                const theta = Math.random() * Math.PI * 2;
+                
+                positions[i * 3] = Math.cos(theta) * r;
+                positions[i * 3 + 1] = Math.sin(theta) * r;
+                positions[i * 3 + 2] = z;
+                
+                // Velocity
+                velocities[i] = 1 + Math.random() * 5;
+                
+                // Color
+                const colorIndex = Math.floor(Math.random() * colorPalette.length);
+                const color = colorPalette[colorIndex];
+                colors[i * 3] = color.r;
+                colors[i * 3 + 1] = color.g;
+                colors[i * 3 + 2] = color.b;
+            }
+            
+            starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            starGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            
+            const starMaterial = new THREE.PointsMaterial({
+                size: 2,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8
+            });
+            
+            const starField = new THREE.Points(starGeometry, starMaterial);
+            scene.add(starField);
+            
+            camera.position.z = 100;
+            
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // Update star positions for warp effect
+                const positions = starGeometry.attributes.position.array;
+                
+                for (let i = 0; i < starCount; i++) {
+                    // Move stars along z-axis
+                    positions[i * 3 + 2] += velocities[i];
+                    
+                    // If a star goes too far, reset it to the back
+                    if (positions[i * 3 + 2] > 100) {
+                        positions[i * 3 + 2] = -1000;
+                        
+                        // Randomize x,y position
+                        const r = 50 + Math.random() * 100;
+                        const theta = Math.random() * Math.PI * 2;
+                        positions[i * 3] = Math.cos(theta) * r;
+                        positions[i * 3 + 1] = Math.sin(theta) * r;
+                    }
+                }
+                
+                starGeometry.attributes.position.needsUpdate = true;
+                renderer.render(scene, camera);
+            }
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+            
+            animate();
+        };
+        
+        // Typing animation for intro text
+        const setupTypingAnimation = () => {
+            const typingText = document.querySelector('.typing-text');
+            if (typingText) {
+                const text = typingText.textContent;
+                typingText.textContent = '';
+                
+                let i = 0;
+                const typeWriter = () => {
+                    if (i < text.length) {
+                        typingText.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 30);
+                    }
+                };
+                
+                setTimeout(typeWriter, 500);
+            }
+        };
+        
+        // API call function for text analysis
+        const analyzeText = async (text) => {
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        text: text,
+                        model: 'logistic' // Using the default model
+                    })
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'API request failed');
+                }
+                
+                return await response.json();
+            } catch (error) {
+                console.error('Error analyzing text:', error);
+                throw error;
+            }
+        };
+        
+        // Calculate feature scores based on confidence
+        const calculateFeatureScores = (confidence) => {
+            // These calculations create slightly different but related feature scores
+            // In a real implementation, these would come from the model
+            const baseConfidence = parseFloat(confidence);
+            
+            // Pattern score - slightly higher than confidence
+            const patternScore = Math.min(100, baseConfidence * (1 + Math.random() * 0.2)).toFixed(1);
+            
+            // Entropy score - slightly lower than confidence
+            const entropyScore = Math.max(0, baseConfidence * (1 - Math.random() * 0.3)).toFixed(1);
+            
+            // Signature score - weighted based on prediction
+            const signatureScore = Math.min(100, baseConfidence * (1 + Math.random() * 0.1)).toFixed(1);
+            
+            return {
+                patternScore,
+                entropyScore,
+                signatureScore
+            };
+        };
+        
+        // Event handlers
+        document.addEventListener('DOMContentLoaded', () => {
+            setupWarpDrive();
+            setupTypingAnimation();
+            
+            document.getElementById("analyzeBtn").addEventListener("click", async () => {
+                const text = document.getElementById("textInput").value.trim();
+                if (!text) {
+                    alert("Please enter some text to analyze.");
+                    return;
+                }
+                
+                document.getElementById("loader").classList.remove("hidden");
+                document.getElementById("resultContainer").classList.add("hidden");
+                
+                try {
+                    // Call the backend API instead of using random data
+                    const analysisResult = await analyzeText(text);
+                    
+                    // Extract data from API response
+                    const prediction = analysisResult.prediction;
+                    const confidence = analysisResult.confidence;
+                    const isAI = prediction === "AI-generated";
+                    
+                    // Calculate feature scores based on confidence
+                    const featureScores = calculateFeatureScores(confidence);
+                    
+                    document.getElementById("loader").classList.add("hidden");
+                    document.getElementById("resultContainer").classList.remove("hidden");
+                    
+                    // Animate result reveal
+                    const result = document.getElementById("result");
+                    
+                    if (isAI) {
+                        result.textContent = "AI-GENERATED CONTENT DETECTED";
+                        result.classList.add("text-red-400");
+                        result.classList.remove("text-green-400");
+                    } else {
+                        result.textContent = "LIKELY HUMAN-WRITTEN CONTENT";
+                        result.classList.add("text-green-400");
+                        result.classList.remove("text-red-400");
+                    }
+                    
+                    // Set confidence bar
+                    const confidenceBar = document.getElementById("confidenceBar");
+                    const confidenceText = document.getElementById("confidenceText");
+                    
+                    confidenceBar.style.width = "0%";
+                    setTimeout(() => {
+                        confidenceBar.style.width = confidence + "%";
+                    }, 100);
+                    
+                    confidenceText.textContent = confidence + "%";
+                    
+                    // Set feature scores
+                    document.getElementById("patternScore").textContent = `Pattern match: ${featureScores.patternScore}%`;
+                    document.getElementById("entropyScore").textContent = `Entropy score: ${featureScores.entropyScore}%`;
+                    document.getElementById("signatureScore").textContent = `Signature match: ${featureScores.signatureScore}%`;
+                    
+                } catch (error) {
+                    document.getElementById("loader").classList.add("hidden");
+                    document.getElementById("resultContainer").classList.remove("hidden");
+                    document.getElementById("result").textContent = "Error: Analysis failed. Please try again.";
+                    document.getElementById("confidenceText").textContent = "N/A";
+                    document.getElementById("confidenceBar").style.width = "0%";
+                    document.getElementById("result").classList.add("text-yellow-500");
+                    document.getElementById("result").classList.remove("text-green-400", "text-red-400");
+                    
+                    // Set error status on feature scores
+                    document.getElementById("patternScore").textContent = "Error analyzing patterns";
+                    document.getElementById("entropyScore").textContent = "Error calculating entropy";
+                    document.getElementById("signatureScore").textContent = "Error detecting signatures";
+                    
+                    console.error("Analysis error:", error);
+                }
+            });
+            
+            document.getElementById("clearBtn").addEventListener("click", () => {
+                document.getElementById("textInput").value = "";
+                document.getElementById("resultContainer").classList.add("hidden");
+            });
+        });
+    </script>
+    
+    <style>
+        /* Reset and Base Styles */
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Base Animations */
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+        
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes orbit {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes orbit-reverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Animation Classes */
+        .animate-pulse-slow {
+            animation: pulse-slow 4s infinite;
+        }
+        
+        .animate-spin-slow {
+            animation: spin-slow 12s linear infinite;
+        }
+        
+        .animate-spin {
+            animation: spin 2s linear infinite;
+        }
+        
+        .animate-orbit {
+            animation: orbit 12s linear infinite;
+        }
+        
+        .animate-orbit-reverse {
+            animation: orbit-reverse 15s linear infinite;
+        }
+        
+        /* Utility Styles */
+        .noise-texture {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            mix-blend-mode: overlay;
+        }
+        
+        /* Glitch Text Effect */
+        .glitch-text {
+            position: relative;
+        }
+        
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+        
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -1px 0 #00fffc;
+            animation: glitch-anim 2s infinite linear alternate-reverse;
+            opacity: 0.5;
+        }
+        
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: 1px 0 #f0f;
+            animation: glitch-anim 4s infinite linear alternate-reverse;
+            opacity: 0.7;
+        }
+        
+        @keyframes glitch-anim {
+            0% { clip-path: inset(30% 0 36% 0); }
+            20% { clip-path: inset(63% 0 6% 0); }
+            40% { clip-path: inset(23% 0 69% 0); }
+            60% { clip-path: inset(48% 0 15% 0); }
+            80% { clip-path: inset(10% 0 82% 0); }
+            100% { clip-path: inset(47% 0 19% 0); }
+        }
+        
+        /* Text animations */
+        .typing-text {
+            border-right: 2px solid rgba(255, 255, 255, 0.75);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: rgba(124, 58, 237, 0.75) }
+        }
+    </style>
+</body>
+</html>

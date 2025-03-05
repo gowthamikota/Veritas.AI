@@ -1,0 +1,7 @@
+skelarn
+joblib
+fastapi
+datasets
+uvicorn
+streamlit
+shap

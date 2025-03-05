@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Analyzer Pro | Features</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+</head>
+<body class="bg-black min-h-screen overflow-auto relative font-sans">
+    <!-- Animated Background -->
+    <div id="warpDrive" class="fixed inset-0 z-0"></div>
+    
+    <!-- Noise Texture Overlay -->
+    <div class="fixed inset-0 z-10 opacity-30 pointer-events-none noise-texture"></div>
+    
+    <!-- Main Content Container - Scrollable -->
+    <div class="container mx-auto px-4 z-20 max-w-4xl pb-8">
+        <!-- Top Navigation -->
+        <nav class="flex justify-between items-center py-4 px-6 lg:px-12 bg-black/30 backdrop-blur-md sticky top-0 z-30">
+            <div class="flex items-center">
+                <a href="/" class="flex items-center">
+                    <div class="relative h-10 w-10 mr-3">
+                        <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500 to-purple-600 animate-spin-slow blur opacity-70"></div>
+                        <div class="absolute inset-0.5 rounded-full bg-gray-900 flex items-center justify-center">
+                            <i class="fas fa-fingerprint text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500"></i>
+                        </div>
+                    </div>
+                    <span class="text-lg font-bold tracking-wider text-white">VERITAS<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">AI</span></span>
+                </a>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#" class="text-sm text-white hover:text-purple-400 transition font-medium">Features</a>
+                <a href="#" class="text-sm text-gray-400 hover:text-white transition">API</a>
+                <a href="#" class="text-sm text-gray-400 hover:text-white transition">Enterprise</a>
+                <a href="#" class="text-sm text-gray-400 hover:text-white transition">Pricing</a>
+            </div>
+            
+            <div>
+                <button class="relative group">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-md blur opacity-30 group-hover:opacity-100 transition duration-300"></div>
+                    <a class="relative px-4 py-2 bg-gray-900 text-gray-300 rounded-md group-hover:text-white transition">Login</a>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="relative py-16 mt-4 text-center">
+            <div class="relative">
+                <div class="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 rounded-2xl blur-lg opacity-75 animate-pulse-slow"></div>
+                <div class="relative p-8 bg-gray-900/90 rounded-xl shadow-2xl border border-gray-800">
+                    <h1 class="text-4xl font-black mb-4 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">
+                        ADVANCED FEATURES
+                    </h1>
+                    <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                        Our cutting-edge neural network technology offers unparalleled accuracy in detecting AI-generated content
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Features Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            <!-- Feature 1 -->
+            <div class="relative group">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-xl blur opacity-30 group-hover:opacity-70 transition duration-300"></div>
+                <div class="relative p-6 bg-gray-900/90 rounded-xl border border-gray-800 h-full">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-900/30 p-3 rounded-lg mr-4">
+                            <i class="fas fa-brain text-2xl text-purple-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Neural Pattern Detection</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Our proprietary algorithm analyzes text structure and patterns to identify AI-generated content with up to 96% accuracy. The system examines linguistic patterns, repetition frequency, and semantic consistency that are characteristic of LLM outputs.
+                    </p>
+                    <ul class="text-gray-400 space-y-2 ml-6 list-disc">
+                        <li>Advanced pattern matching against known AI text signatures</li>
+                        <li>Detection of subtle linguistic anomalies</li>
+                        <li>Real-time analysis with immediate results</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="relative group">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-xl blur opacity-30 group-hover:opacity-70 transition duration-300"></div>
+                <div class="relative p-6 bg-gray-900/90 rounded-xl border border-gray-800 h-full">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-cyan-900/30 p-3 rounded-lg mr-4">
+                            <i class="fas fa-fingerprint text-2xl text-cyan-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">AI Signature Analysis</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Identifies unique signatures left by different AI models. Our system can detect content from various AI models including GPT-4, Claude, and other language models by analyzing their characteristic output patterns.
+                    </p>
+                    <ul class="text-gray-400 space-y-2 ml-6 list-disc">
+                        <li>Model-specific detection capabilities</li>
+                        <li>Updated regularly to detect latest AI models</li>
+                        <li>Identifies hybrid content (human-edited AI text)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="relative group">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-xl blur opacity-30 group-hover:opacity-70 transition duration-300"></div>
+                <div class="relative p-6 bg-gray-900/90 rounded-xl border border-gray-800 h-full">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-pink-900/30 p-3 rounded-lg mr-4">
+                            <i class="fas fa-chart-line text-2xl text-pink-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Statistical Entropy Analysis</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Measures text randomness and predictability patterns that differ between human and AI writers. This feature quantifies the statistical entropy of text, revealing the subtle differences in how AI models generate content compared to humans.
+                    </p>
+                    <ul class="text-gray-400 space-y-2 ml-6 list-disc">
+                        <li>Quantitative measurement of text predictability</li>
+                        <li>Detection of artificially balanced sentence structures</li>
+                        <li>Analysis of linguistic variance and creativity markers</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Feature 4 -->
+            <div class="relative group">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-xl blur opacity-30 group-hover:opacity-70 transition duration-300"></div>
+                <div class="relative p-6 bg-gray-900/90 rounded-xl border border-gray-800 h-full">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-900/30 p-3 rounded-lg mr-4">
+                            <i class="fas fa-shield-alt text-2xl text-indigo-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Academic Integrity Shield</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Specialized tool for educational institutions to verify student submissions. Our Academic Integrity Shield helps educators identify AI-generated essays, papers, and assignments with high precision.
+                    </p>
+                    <ul class="text-gray-400 space-y-2 ml-6 list-disc">
+                        <li>Batch processing for multiple documents</li>
+                        <li>Detailed reports with highlighted suspicious sections</li>
+                        <li>Integration with popular learning management systems</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Enterprise Features Section -->
+        <div class="mt-16">
+            <div class="relative">
+                <div class="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 rounded-2xl blur-lg opacity-75"></div>
+                <div class="relative p-8 bg-gray-900/90 rounded-xl shadow-2xl border border-gray-800">
+                    <h2 class="text-3xl font-bold mb-6 text-white">Enterprise Solutions</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Enterprise Feature 1 -->
+                        <div class="bg-gray-800/50 p-5 rounded-lg border border-gray-700 hover:border-purple-500/50 transition duration-300">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-server text-purple-400 mr-3"></i>
+                                <h3 class="text-lg font-semibold text-white">API Integration</h3>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                Seamlessly integrate our detection capabilities into your existing systems with our robust API
+                            </p>
+                        </div>
+                        
+                        <!-- Enterprise Feature 2 -->
+                        <div class="bg-gray-800/50 p-5 rounded-lg border border-gray-700 hover:border-cyan-500/50 transition duration-300">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-chart-pie text-cyan-400 mr-3"></i>
+                                <h3 class="text-lg font-semibold text-white">Analytics Dashboard</h3>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                Comprehensive analytics with insights into detection patterns and content trends
+                            </p>
+                        </div>
+                        
+                        <!-- Enterprise Feature 3 -->
+                        <div class="bg-gray-800/50 p-5 rounded-lg border border-gray-700 hover:border-pink-500/50 transition duration-300">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-user-lock text-pink-400 mr-3"></i>
+                                <h3 class="text-lg font-semibold text-white">Custom Security</h3>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                Enhanced security features and compliance with industry standards for sensitive data
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 text-center">
+                        <button class="group relative inline-block">
+                            <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-md blur opacity-30 group-hover:opacity-100 transition duration-300"></div>
+                            <a class="relative px-8 py-3 bg-gray-900 text-white rounded-md group-hover:bg-gray-800 transition font-medium">
+                                Request Enterprise Demo
+                            </a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Technology Comparison -->
+        <div class="mt-16">
+            <h2 class="text-2xl font-bold mb-6 text-white text-center">How We Compare</h2>
+            
+            <div class="relative overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="bg-gray-800/80 text-white">
+                            <th class="p-4 rounded-tl-lg">Features</th>
+                            <th class="p-4 text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 font-bold">VeritasAI</th>
+                            <th class="p-4 text-center">Standard Detection</th>
+                            <th class="p-4 text-center rounded-tr-lg">Basic Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-gray-900/60 border-b border-gray-800">
+                            <td class="p-4 font-medium text-white">Neural Network Analysis</td>
+                            <td class="p-4 text-center text-green-400"><i class="fas fa-check-circle"></i></td>
+                            <td class="p-4 text-center text-yellow-500"><i class="fas fa-adjust"></i></td>
+                            <td class="p-4 text-center text-red-400"><i class="fas fa-times-circle"></i></td>
+                        </tr>
+                        <tr class="bg-gray-900/40 border-b border-gray-800">
+                            <td class="p-4 font-medium text-white">Multi-Model Detection</td>
+                            <td class="p-4 text-center text-green-400"><i class="fas fa-check-circle"></i></td>
+                            <td class="p-4 text-center text-red-400"><i class="fas fa-times-circle"></i></td>
+                            <td class="p-4 text-center text-red-400"><i class="fas fa-times-circle"></i></td>
+                        </tr>
+                        <tr class="bg-gray-900/60 border-b border-gray-800">
+                            <td class="p-4 font-medium text-white">Hybrid Content Analysis</td>
+                            <td class="p-4 text-center text-green-400"><i class="fas fa-check-circle"></i></td>
+                            <td class="p-4 text-center text-yellow-500"><i class="fas fa-adjust"></i></td>
+                            <td class="p-4 text-center text-red-400"><i class="fas fa-times-circle"></i></td>
+                        </tr>
+                        <tr class="bg-gray-900/40 border-b border-gray-800">
+                            <td class="p-4 font-medium text-white">Enterprise API Access</td>
+                            <td class="p-4 text-center text-green-400"><i class="fas fa-check-circle"></i></td>
+                            <td class="p-4 text-center text-green-400"><i class="fas fa-check-circle"></i></td>
+                            <td class="p-4 text-center text-red-400"><i class="fas fa-times-circle"></i></td>
+                        </tr>
+                        <tr class="bg-gray-900/60">
+                            <td class="p-4 font-medium text-white rounded-bl-lg">Confidence Scoring</td>
+                            <td class="p-4 text-center text-green-400"><i class="fas fa-check-circle"></i></td>
+                            <td class="p-4 text-center text-yellow-500"><i class="fas fa-adjust"></i></td>
+                            <td class="p-4 text-center text-red-400 rounded-br-lg"><i class="fas fa-times-circle"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Call to Action -->
+        <div class="mt-16 text-center">
+            <div class="relative">
+                <div class="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 rounded-2xl blur-lg opacity-75 animate-pulse-slow"></div>
+                <div class="relative p-8 bg-gray-900/90 rounded-xl shadow-2xl border border-gray-800">
+                    <h2 class="text-3xl font-bold mb-4 text-white">Ready to Detect AI Content?</h2>
+                    <p class="text-lg text-gray-300 mb-8">
+                        Try our powerful detection tool today and gain confidence in the authenticity of your content
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <button class="group relative inline-block">
+                            <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-md blur opacity-30 group-hover:opacity-100 transition duration-300"></div>
+                            <a href="/detector" class="relative px-8 py-3 bg-gray-900 text-white rounded-md group-hover:bg-gray-800 transition font-medium">
+                                Try It Now
+                            </a>
+                        </button>
+                        
+                        <button class="relative inline-block">
+                            <a class="px-8 py-3 border border-gray-600 text-gray-300 rounded-md hover:text-white hover:border-purple-500 transition">
+                                Learn More
+                            </a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="py-4 text-center mt-16">
+            <p class="text-gray-500 text-xs">© 2025 VeritasAI • Advanced AI Detection Technologies</p>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script>
+        // Three.js Warp Drive Effect
+        const setupWarpDrive = () => {
+            const container = document.getElementById('warpDrive');
+            
+            // Scene setup
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+            
+            // Create stars
+            const starGeometry = new THREE.BufferGeometry();
+            const starCount = 2000;
+            
+            const positions = new Float32Array(starCount * 3);
+            const velocities = new Float32Array(starCount);
+            const colors = new Float32Array(starCount * 3);
+            
+            const colorPalette = [
+                new THREE.Color(0x4CC9F0), // Cyan
+                new THREE.Color(0x7209B7), // Purple
+                new THREE.Color(0xF72585),  // Pink
+                new THREE.Color(0x3A0CA3)   // Deep blue
+            ];
+            
+            // Initialize stars with random positions
+            for (let i = 0; i < starCount; i++) {
+                // Position
+                const z = Math.random() * 2000 - 1000;
+                const r = 50 + Math.random() * 100;
+                const theta = Math.random() * Math.PI * 2;
+                
+                positions[i * 3] = Math.cos(theta) * r;
+                positions[i * 3 + 1] = Math.sin(theta) * r;
+                positions[i * 3 + 2] = z;
+                
+                // Velocity
+                velocities[i] = 1 + Math.random() * 5;
+                
+                // Color
+                const colorIndex = Math.floor(Math.random() * colorPalette.length);
+                const color = colorPalette[colorIndex];
+                colors[i * 3] = color.r;
+                colors[i * 3 + 1] = color.g;
+                colors[i * 3 + 2] = color.b;
+            }
+            
+            starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            starGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            
+            const starMaterial = new THREE.PointsMaterial({
+                size: 2,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8
+            });
+            
+            const starField = new THREE.Points(starGeometry, starMaterial);
+            scene.add(starField);
+            
+            camera.position.z = 100;
+            
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // Update star positions for warp effect
+                const positions = starGeometry.attributes.position.array;
+                
+                for (let i = 0; i < starCount; i++) {
+                    // Move stars along z-axis
+                    positions[i * 3 + 2] += velocities[i];
+                    
+                    // If a star goes too far, reset it to the back
+                    if (positions[i * 3 + 2] > 100) {
+                        positions[i * 3 + 2] = -1000;
+                        
+                        // Randomize x,y position
+                        const r = 50 + Math.random() * 100;
+                        const theta = Math.random() * Math.PI * 2;
+                        positions[i * 3] = Math.cos(theta) * r;
+                        positions[i * 3 + 1] = Math.sin(theta) * r;
+                    }
+                }
+                
+                starGeometry.attributes.position.needsUpdate = true;
+                renderer.render(scene, camera);
+            }
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+            
+            animate();
+        };
+        
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            setupWarpDrive();
+        });
+    </script>
+    
+    <style>
+        /* Reset and Base Styles */
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Base Animations */
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+        
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Animation Classes */
+        .animate-pulse-slow {
+            animation: pulse-slow 4s infinite;
+        }
+        
+        .animate-spin-slow {
+            animation: spin-slow 12s linear infinite;
+        }
+        
+        .animate-spin {
+            animation: spin 2s linear infinite;
+        }
+        
+        /* Utility Styles */
+        .noise-texture {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            mix-blend-mode: overlay;
+        }
+    </style>
+</body>
+</html>

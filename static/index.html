@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Analyzer Pro | Enterprise-Grade Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+</head>
+<body class="bg-black h-screen flex flex-col items-center justify-center overflow-hidden relative font-sans">
+    <!-- Animated Background -->
+    <div id="warpDrive" class="absolute inset-0 z-0"></div>
+    
+    <!-- Noise Texture Overlay -->
+    <div class="absolute inset-0 z-10 opacity-30 pointer-events-none noise-texture"></div>
+    
+    <!-- Custom Cursor
+    <div id="custom-cursor" class="hidden lg:block fixed w-8 h-8 pointer-events-none z-50 mix-blend-difference"></div> -->
+    
+    <!-- Main Content Container - Fixed Height -->
+    <div class="container mx-auto px-4 z-20 max-w-4xl h-screen flex flex-col">
+        <!-- Top Navigation -->
+        <nav class="flex justify-between items-center py-4 px-6 lg:px-12 bg-black/30 backdrop-blur-md">
+            <div class="flex items-center">
+                <div class="relative h-10 w-10 mr-3">
+                    <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500 to-purple-600 animate-spin-slow blur opacity-70"></div>
+                    <div class="absolute inset-0.5 rounded-full bg-gray-900 flex items-center justify-center">
+                        <i class="fas fa-fingerprint text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500"></i>
+                    </div>
+                </div>
+                <span class="text-lg font-bold tracking-wider text-white">VERITAS<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">AI</span></span>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#" class="text-sm text-gray-400 hover:text-white transition">Features</a>
+                <a href="#" class="text-sm text-gray-400 hover:text-white transition">API</a>
+                <a href="#" class="text-sm text-gray-400 hover:text-white transition">Enterprise</a>
+                <a href="#" class="text-sm text-gray-400 hover:text-white transition">Pricing</a>
+            </div>
+            
+            <div>
+                <button class="relative group">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-md blur opacity-30 group-hover:opacity-100 transition duration-300"></div>
+                    <a class="relative px-4 py-2 bg-gray-900 text-gray-300 rounded-md group-hover:text-white transition">Login</a>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area - Centered and Compact -->
+        <div class="flex-1 flex items-center justify-center">
+            <div class="relative w-full max-w-3xl">
+                <!-- Main Card with Glow Effect -->
+                <div class="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 rounded-2xl blur-lg opacity-75 animate-pulse-slow"></div>
+                
+                <div class="relative bg-gray-900/90 rounded-xl shadow-2xl overflow-hidden border border-gray-800">
+                    <!-- Hero Header -->
+                    <div class="relative p-6 text-center">
+                        <!-- Top Border Gradient -->
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500"></div>
+                        
+                        <div class="flex justify-center mb-4">
+                            <div class="relative inline-block">
+                                <div class="absolute -inset-2 rounded-full blur opacity-70 bg-gradient-to-r from-cyan-400 to-purple-500 animate-pulse"></div>
+                                <div class="relative bg-gray-800/80 rounded-full p-4 backdrop-blur-sm border border-gray-700">
+                                    <i class="fas fa-brain text-3xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500"></i>
+                                </div>
+                                
+                                <!-- Orbiting Elements -->
+                                <div class="absolute top-1/2 left-1/2 w-20 h-20 -mt-10 -ml-10">
+                                    <div class="absolute w-full h-full rounded-full border border-purple-500/20 animate-orbit"></div>
+                                    <div class="absolute w-2 h-2 rounded-full bg-cyan-400 top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-orbit-element"></div>
+                                </div>
+                                <div class="absolute top-1/2 left-1/2 w-24 h-24 -mt-12 -ml-12">
+                                    <div class="absolute w-full h-full rounded-full border border-cyan-500/20 animate-orbit-reverse"></div>
+                                    <div class="absolute w-2 h-2 rounded-full bg-pink-400 bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 animate-orbit-element-reverse"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h1 class="glitch-text text-4xl font-black mb-2 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">
+                            AI ANALYZER PRO
+                        </h1>
+                        
+                        <p class="text-lg text-gray-300 max-w-3xl mx-auto mb-6">
+                            <span class="typing-text">Advanced neural detection engine that identifies AI-generated content with 99.8% accuracy</span>
+                        </p>
+                        
+                        <!-- Animated Stats Bar - Compact -->
+                        <div class="flex justify-center gap-x-8 mb-4">
+                            <div class="flex flex-col items-center">
+                                <div class="radial-progress-container">
+                                    <svg class="radial-progress" width="50" height="50">
+                                        <circle class="radial-progress-bg" cx="25" cy="25" r="20"></circle>
+                                        <circle class="radial-progress-fill radial-cyan" cx="25" cy="25" r="20" style="--percent: 99.8"></circle>
+                                        <text x="25" y="29" class="radial-progress-text">99.8%</text>
+                                    </svg>
+                                </div>
+                                <span class="text-xs text-gray-400 mt-1">Accuracy</span>
+                            </div>
+                            
+                            <div class="flex flex-col items-center">
+                                <div class="radial-progress-container">
+                                    <svg class="radial-progress" width="50" height="50">
+                                        <circle class="radial-progress-bg" cx="25" cy="25" r="20"></circle>
+                                        <circle class="radial-progress-fill radial-purple" cx="25" cy="25" r="20" style="--percent: 92"></circle>
+                                        <text x="25" y="29" class="radial-progress-text">92%</text>
+                                    </svg>
+                                </div>
+                                <span class="text-xs text-gray-400 mt-1">Specificity</span>
+                            </div>
+                            
+                            <div class="flex flex-col items-center">
+                                <div class="radial-progress-container">
+                                    <svg class="radial-progress" width="50" height="50">
+                                        <circle class="radial-progress-bg" cx="25" cy="25" r="20"></circle>
+                                        <circle class="radial-progress-fill radial-pink" cx="25" cy="25" r="20" style="--percent: 97"></circle>
+                                        <text x="25" y="29" class="radial-progress-text">97%</text>
+                                    </svg>
+                                </div>
+                                <span class="text-xs text-gray-400 mt-1">Sensitivity</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center mb-6">
+                        <a href="/detector" class="group relative inline-flex items-center">
+                            <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-lg blur opacity-70 group-hover:opacity-100 transition duration-300"></div>
+                            <button class="relative px-6 py-3 bg-gray-900 text-white rounded-lg font-bold flex items-center justify-center space-x-2 transition group-hover:bg-gray-950">
+                                <span>Go To Detector</span>
+                                <i class="fas fa-angle-right opacity-70 group-hover:translate-x-1 transition duration-300"></i>
+                            </button>
+                        </a>
+                    </div>
+                    
+                    <!-- Feature Cards Section - More Compact -->
+                    <div class="grid grid-cols-3 gap-2 p-4 bg-gradient-to-b from-gray-900/80 to-gray-950/80">
+                        <div class="feature-card p-3 rounded-lg bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 hover:border-purple-500/30 transition duration-300">
+                            <div class="flex items-center mb-2">
+                                <div class="flex-shrink-0 rounded-full bg-indigo-900/30 p-2 mr-2">
+                                    <i class="fas fa-microchip text-indigo-400 text-sm"></i>
+                                </div>
+                                <h3 class="text-sm font-bold text-white">Neural Analysis</h3>
+                            </div>
+                            <p class="text-gray-400 text-xs">Identifies patterns across 16 linguistic dimensions</p>
+                        </div>
+                        
+                        <div class="feature-card p-3 rounded-lg bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 hover:border-cyan-500/30 transition duration-300">
+                            <div class="flex items-center mb-2">
+                                <div class="flex-shrink-0 rounded-full bg-cyan-900/30 p-2 mr-2">
+                                    <i class="fas fa-chart-simple text-cyan-400 text-sm"></i>
+                                </div>
+                                <h3 class="text-sm font-bold text-white">Detailed Reports</h3>
+                            </div>
+                            <p class="text-gray-400 text-xs">Comprehensive confidence scores with heatmaps</p>
+                        </div>
+                        
+                        <div class="feature-card p-3 rounded-lg bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 hover:border-pink-500/30 transition duration-300">
+                            <div class="flex items-center mb-2">
+                                <div class="flex-shrink-0 rounded-full bg-pink-900/30 p-2 mr-2">
+                                    <i class="fas fa-bolt text-pink-400 text-sm"></i>
+                                </div>
+                                <h3 class="text-sm font-bold text-white">Real-time API</h3>
+                            </div>
+                            <p class="text-gray-400 text-xs">Enterprise-grade API with 200ms response time</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script>
+        // Three.js Warp Drive Effect
+        const setupWarpDrive = () => {
+            const container = document.getElementById('warpDrive');
+            
+            // Scene setup
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+            
+            // Create stars
+            const starGeometry = new THREE.BufferGeometry();
+            const starCount = 2000;
+            
+            const positions = new Float32Array(starCount * 3);
+            const velocities = new Float32Array(starCount);
+            const colors = new Float32Array(starCount * 3);
+            
+            const colorPalette = [
+                new THREE.Color(0x4CC9F0), // Cyan
+                new THREE.Color(0x7209B7), // Purple
+                new THREE.Color(0xF72585),  // Pink
+                new THREE.Color(0x3A0CA3)   // Deep blue
+            ];
+            
+            // Initialize stars with random positions
+            for (let i = 0; i < starCount; i++) {
+                // Position
+                const z = Math.random() * 2000 - 1000;
+                const r = 50 + Math.random() * 100;
+                const theta = Math.random() * Math.PI * 2;
+                
+                positions[i * 3] = Math.cos(theta) * r;
+                positions[i * 3 + 1] = Math.sin(theta) * r;
+                positions[i * 3 + 2] = z;
+                
+                // Velocity
+                velocities[i] = 1 + Math.random() * 5;
+                
+                // Color
+                const colorIndex = Math.floor(Math.random() * colorPalette.length);
+                const color = colorPalette[colorIndex];
+                colors[i * 3] = color.r;
+                colors[i * 3 + 1] = color.g;
+                colors[i * 3 + 2] = color.b;
+            }
+            
+            starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            starGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            
+            const starMaterial = new THREE.PointsMaterial({
+                size: 2,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8
+            });
+            
+            const starField = new THREE.Points(starGeometry, starMaterial);
+            scene.add(starField);
+            
+            camera.position.z = 100;
+            
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // Update star positions for warp effect
+                const positions = starGeometry.attributes.position.array;
+                
+                for (let i = 0; i < starCount; i++) {
+                    // Move stars along z-axis
+                    positions[i * 3 + 2] += velocities[i];
+                    
+                    // If a star goes too far, reset it to the back
+                    if (positions[i * 3 + 2] > 100) {
+                        positions[i * 3 + 2] = -1000;
+                        
+                        // Randomize x,y position
+                        const r = 50 + Math.random() * 100;
+                        const theta = Math.random() * Math.PI * 2;
+                        positions[i * 3] = Math.cos(theta) * r;
+                        positions[i * 3 + 1] = Math.sin(theta) * r;
+                    }
+                }
+                
+                starGeometry.attributes.position.needsUpdate = true;
+                renderer.render(scene, camera);
+            }
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+            
+            animate();
+        };
+        
+        // Custom cursor
+        const setupCustomCursor = () => {
+            const cursor = document.getElementById('custom-cursor');
+            const links = document.querySelectorAll('a, button');
+            
+            document.addEventListener('mousemove', (e) => {
+                requestAnimationFrame(() => {
+                    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+                });
+            });
+            
+            links.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    cursor.classList.add('cursor-hover');
+                });
+                
+                link.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('cursor-hover');
+                });
+            });
+        };
+        
+        // Disable scrolling
+        const disableScrolling = () => {
+            document.body.style.overflow = 'hidden';
+            document.body.style.height = '100vh';
+            document.body.style.margin = '0';
+            document.body.style.padding = '0';
+            
+            // Prevent default for wheel and touch events
+            document.addEventListener('wheel', preventDefaultScroll, { passive: false });
+            document.addEventListener('touchmove', preventDefaultScroll, { passive: false });
+        };
+        
+        function preventDefaultScroll(e) {
+            e.preventDefault();
+        }
+        
+        // Typing animation for intro text
+        const setupTypingAnimation = () => {
+            const typingText = document.querySelector('.typing-text');
+            if (typingText) {
+                const text = typingText.textContent;
+                typingText.textContent = '';
+                
+                let i = 0;
+                const typeWriter = () => {
+                    if (i < text.length) {
+                        typingText.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 30);
+                    }
+                };
+                
+                setTimeout(typeWriter, 500);
+            }
+        };
+        
+        // Initialize everything when DOM loads
+        document.addEventListener('DOMContentLoaded', () => {
+            setupWarpDrive();
+            setupCustomCursor();
+            disableScrolling();
+            setupTypingAnimation();
+        });
+    </script>
+    
+    <style>
+        /* Reset and Base Styles */
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        
+        /* Base Animations */
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+        
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes orbit {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes orbit-reverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Animation Classes */
+        .animate-pulse-slow {
+            animation: pulse-slow 4s infinite;
+        }
+        
+        .animate-spin-slow {
+            animation: spin-slow 12s linear infinite;
+        }
+        
+        .animate-orbit {
+            animation: orbit 12s linear infinite;
+        }
+        
+        .animate-orbit-reverse {
+            animation: orbit-reverse 15s linear infinite;
+        }
+        
+        .animate-orbit-element {
+            animation: orbit 12s linear infinite;
+        }
+        
+        .animate-orbit-element-reverse {
+            animation: orbit-reverse 15s linear infinite;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Utility Styles */
+        .noise-texture {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            mix-blend-mode: overlay;
+        }
+        
+        /* Custom Cursor */
+        #custom-cursor {
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, border-color 0.2s;
+        }
+        
+        #custom-cursor.cursor-hover {
+            width: 60px;
+            height: 60px;
+            border-color: rgba(124, 58, 237, 0.7);
+            transition: all 0.1s;
+        }
+        
+        /* Glitch Text Effect */
+        .glitch-text {
+            position: relative;
+        }
+        
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+        
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -1px 0 #00fffc;
+            animation: glitch-anim 2s infinite linear alternate-reverse;
+            opacity: 0.5;
+        }
+        
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: 1px 0 #f0f;
+            animation: glitch-anim 4s infinite linear alternate-reverse;
+            opacity: 0.7;
+        }
+        
+        @keyframes glitch-anim {
+            0% { clip-path: inset(30% 0 36% 0); }
+            20% { clip-path: inset(63% 0 6% 0); }
+            40% { clip-path: inset(23% 0 69% 0); }
+            60% { clip-path: inset(48% 0 15% 0); }
+            80% { clip-path: inset(10% 0 82% 0); }
+            100% { clip-path: inset(47% 0 19% 0); }
+        }
+        
+        /* Radial Progress */
+        .radial-progress-container {
+            position: relative;
+        }
+        
+        .radial-progress-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-width: 3;
+        }
+        
+        .radial-progress-fill {
+            fill: none;
+            stroke-width: 3;
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: center;
+            transition: stroke-dashoffset 1s ease-in-out;
+            stroke-dasharray: 125.6; /* 2 * PI * radius */
+            stroke-dashoffset: calc(125.6 - (125.6 * var(--percent)) / 100);
+        }
+        
+        .radial-cyan {
+            stroke: #4CC9F0;
+        }
+        
+        .radial-purple {
+            stroke: #7209B7;
+        }
+        
+        .radial-pink {
+            stroke: #F72585;
+        }
+        
+        .radial-progress-text {
+            fill: white;
+            font-size: 8px;
+            text-anchor: middle;
+            dominant-baseline: middle;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+        
+        /* Feature card hover effects */
+        .feature-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px -5px rgba(80, 70, 230, 0.3);
+        }
+        
+        /* Text animations */
+        .typing-text {
+            border-right: 2px solid rgba(255, 255, 255, 0.75);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: rgba(124, 58, 237, 0.75) }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .glitch-text {
+                font-size: 2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .radial-progress {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</body>
+</html>
